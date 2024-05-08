@@ -11,6 +11,9 @@
             padding: 35px;
             margin: auto 40px;
             margin-bottom: 25px;
+            img{
+                margin-bottom: 50px;
+            }
         }
         .my-btn{
             background-color: rgba(57, 109, 253, 1);
@@ -31,6 +34,7 @@
         .file-input-container {
             position: relative;
             display: inline-block;
+            cursor: pointer;
         }
         .file-input-label {
             display: inline-block;
@@ -48,6 +52,11 @@
             height: 100%;
             opacity: 0;
             cursor: pointer;
+        }
+        h3{
+            color: rgba(77, 77, 191, 1);
+            font-weight: bold;
+            font-size: 22px;
         }   
     }
     h2{

@@ -6,8 +6,11 @@
                     <h2>Upload Image</h2>
                 </div>
                 <div class="col-12">
-                    <div class="drop-zone text-center">
-                        <img src="assets/icons/uplaod-image-icone.png" alt="" srcset="">
+                    <div class="drop-zone text-center" appDragDrop (files)="filesDropped($event)">
+                        <img src="assets/icons/uplaod-image-icone.png" alt="" srcset="" *ngIf="files.length === 0">
+                        <div *ngFor="let file of files">
+                            <img *ngIf="file" [src]="file.url" width="300px">
+                          </div>
                         <h3>Drag and Drop files</h3>
                         <p>or</p>
                         <div class="file-input-container">

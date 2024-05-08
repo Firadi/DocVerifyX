@@ -1,12 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DocVerifyX</title>
-</head>
-<body>
-
 <div class="container">
     <div class="header">
         <img src="../../assets/images/logo.jpeg" alt="Logo" class="logo">
@@ -14,7 +5,7 @@
     </div>
     <p>Select the Document Type to Begin Verification</p>
     <div class="buttons">
-        <button id="passport" class="enabled" onclick="selectButton(this.id)">Passport</button>
+        <button id="passport" class="enabled" onclick="selectButton(this.id)" (click)="open()">Passport</button>
         <button id="cin" class="disabled" onclick="selectButton(this.id)">CIN</button>
         <button id="contract" class="disabled" onclick="selectButton(this.id)">Contract</button>
         <button id="visa" class="disabled" onclick="selectButton(this.id)">Visa</button>
@@ -23,7 +14,30 @@
         <input type="submit" value="Submit">
     </div>
 </div>
-
-</body>
-</html>
-
+<ng-template #content let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+		<form>
+			<div class="mb-3">
+				<label for="dateOfBirth">Date of birth</label>
+				<div class="input-group">
+					<input
+						id="dateOfBirth"
+						class="form-control"
+						placeholder="yyyy-mm-dd"
+						name="dp"
+						ngbDatepicker
+						#dp="ngbDatepicker"
+					/>
+					<button class="btn btn-outline-secondary bi bi-calendar3" (click)="dp.toggle()" type="button"></button>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+	</div>
+</ng-template>

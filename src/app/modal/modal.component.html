@@ -7,9 +7,9 @@
                 </div>
                 <div class="col-12">
                     <div class="drop-zone text-center" appDragDrop (files)="filesDropped($event)">
-                        <img src="assets/icons/uplaod-image-icone.png" *ngIf="files.length === 0">
-                        <div *ngFor="let file of files" class="track">
-                            <img *ngIf="file" [src]="file.url" width="300px">
+                        <img src="assets/icons/uplaod-image-icone.png" *ngIf="file === null">
+                        <div class="track">
+                            <img *ngIf="file" [src]="file.url" width="300px" >
                         </div>
                         <h3>Drag and Drop files</h3>
                         <p>or</p>
@@ -20,7 +20,7 @@
                     </div>
                 </div>
                 <div class="col-12 btns">
-                    <button class="my-btn" (click)="activeModal.dismiss('Cross click')" routerLink="verification">Upload</button>
+                    <button class="my-btn" (click)="sendFile()" routerLink="verification">Extract</button>
                     <button class="my-btn outline" aria-label="Close" (click)="activeModal.dismiss('Cross click')">cancel</button>
                 </div>
             </div>

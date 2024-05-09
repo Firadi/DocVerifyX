@@ -26,13 +26,13 @@ export class DragDropDirective {
   @HostListener("dragover", ["$event"]) public onDragOver(evt: DragEvent) {
     evt.preventDefault();
     evt.stopPropagation();
-    this.background = "#999";
+    this.background = "#edfaff";
   }
 
   @HostListener("dragleave", ["$event"]) public onDragLeave(evt: DragEvent) {
     evt.preventDefault();
     evt.stopPropagation();
-    //this.background = "#eee";
+    this.background = "#eee";
   }
 
   @HostListener('drop', ['$event']) public onDrop(evt: DragEvent) {
@@ -41,7 +41,9 @@ export class DragDropDirective {
     this.background = '#eee';
   
     let files: FileHandle[] = [];
+    console.log(evt.dataTransfer.files);
     for (let i = 0; i < 1/*evt.dataTransfer.files.length*/; i++) {
+      
       const file = evt.dataTransfer.files[i];
       const url = this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(file));
       files.push({ file, url });

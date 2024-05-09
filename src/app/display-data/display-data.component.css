@@ -27,14 +27,15 @@
 }
 
 .upload-area {
-    align-self: center;
+    align-self: right;
     align-items: center;
     margin:0 0 20px 0;
     width: 40%;
 }
 
 .upload-area img {
-    width: 100%;
+    max-width: 100%;
+    max-height: 500px;
     border-radius: 10px;
 }
 

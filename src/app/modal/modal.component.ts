@@ -42,11 +42,8 @@ export class ModalComponent {
 				const url: SafeUrl = this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(selectedFile));
 				const fileHandle =  { file:selectedFile, url: url};
 				this.file = fileHandle;
-			} else {
-			// File type is not allowed, you can handle this case accordingly
-			console.log('File type not supported:', selectedFile.type);
-			// You might want to display an error message to the user
-			}
+			} else console.log('File type not supported:', selectedFile.type);
+						
 		}
 		return false;
 	}

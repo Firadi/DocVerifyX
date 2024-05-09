@@ -43,13 +43,20 @@ export class DragDropDirective {
     let files: FileHandle[] = [];
     console.log(evt.dataTransfer.files);
     for (let i = 0; i < 1/*evt.dataTransfer.files.length*/; i++) {
-      
       const file = evt.dataTransfer.files[i];
-      const url = this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(file));
-      files.push({ file, url });
+      if (this.validateFile(file.type)) {
+        const url = this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(file));
+        files.push({ file, url });
+      }
+      else console.log('File type not supported:', file.type);
     }
     if (files.length > 0) {
       this.files.emit(files);
     }
+    
+  }
+  private validateFile(fileType: string): boolean {
+    // Check if the file type is image
+    return fileType === 'image/jpeg' || fileType === 'image/png' || fileType === 'image/jpj';
   }
 }

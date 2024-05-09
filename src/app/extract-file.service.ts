@@ -16,8 +16,8 @@ export class ExtractFileService {
 
   extractAndSendFile(file: FileHandle): void {
 
-
   }
+  
 }
 
 

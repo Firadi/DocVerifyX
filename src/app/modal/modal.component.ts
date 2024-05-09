@@ -1,24 +1,25 @@
 import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { DragDropDirective, FileHandle } from '../drag-drop.directive';
-import { NgFor, NgIf } from '@angular/common';
+import { NgClass, NgFor, NgIf } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { ExtractFileService } from '../extract-file.service';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
 	selector: 'ngbd-modal-content',
 	standalone: true,
 	templateUrl: "./modal.component.html",
 	styleUrl: './modal.component.scss',
-	imports: [DragDropDirective, NgIf, NgFor, RouterLink]
+	imports: [DragDropDirective, NgIf, NgFor, RouterLink, NgClass]
 })
 export class ModalComponent {
 
 	
-	constructor(private fileTransferService: ExtractFileService){}
+	constructor(private fileTransferService: ExtractFileService, private sanitizer: DomSanitizer){}
 	@Input() name: string;
   	activeModal = inject(NgbActiveModal);
-  	file: FileHandle = null;
+  	file: FileHandle | null = null;
   	test = true;
 
 	sendFile(): void {
@@ -31,4 +32,22 @@ export class ModalComponent {
   	filesDropped(files: FileHandle[]): void {
     	this.file = files[0];
   	}
+	fileBrowsed(event: Event): FileHandle | boolean{
+		const input = event.target as HTMLInputElement;
+		const files = input.files;
+		if (files && files.length > 0) {
+			const allowedTypes = ['image/jpeg', 'image/png']; // Example allowed file types
+			const selectedFile = files[0];
+			if (allowedTypes.includes(selectedFile.type)) {
+				const url: SafeUrl = this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(selectedFile));
+				const fileHandle =  { file:selectedFile, url: url};
+				this.file = fileHandle;
+			} else {
+			// File type is not allowed, you can handle this case accordingly
+			console.log('File type not supported:', selectedFile.type);
+			// You might want to display an error message to the user
+			}
+		}
+		return false;
+	}
 }

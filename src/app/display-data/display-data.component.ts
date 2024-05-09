@@ -23,9 +23,8 @@ export class DisplayDataComponent {
   ngOnInit(): void {
     this.fileTransferService.file$.subscribe(file => {
       this.file = file;
-      if (this.file === null) {
-        this.router.navigate(['']);
-      }
+      if (this.file === null) this.router.navigate(['']);
+      
       // extracting file here
     });
   }

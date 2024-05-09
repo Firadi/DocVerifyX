@@ -1,9 +1,5 @@
-
-
 .container{
-    
     .left-box{
-
         .drop-zone{
             background-color: rgba(242, 242, 255, 1);
             border: 3px dashed rgba(77, 77, 191, 1);
@@ -74,6 +70,12 @@
     display: flex;
     justify-content: center;
     gap: 75px;
+    .disabled-btn{
+        border-radius: 27px !important;
+        font-size: 18px !important;
+        opacity: 0.65 !important;
+        cursor: not-allowed !important;
+    }
 }
 .col-6 {
     position: relative;

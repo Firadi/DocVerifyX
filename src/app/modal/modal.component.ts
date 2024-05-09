@@ -36,7 +36,7 @@ export class ModalComponent {
 		const input = event.target as HTMLInputElement;
 		const files = input.files;
 		if (files && files.length > 0) {
-			const allowedTypes = ['image/jpeg', 'image/png']; // Example allowed file types
+			const allowedTypes = ['image/jpeg', 'image/png']; 
 			const selectedFile = files[0];
 			if (allowedTypes.includes(selectedFile.type)) {
 				const url: SafeUrl = this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(selectedFile));

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { DragDropDirective, FileHandle } from '../drag-drop.directive';
 import { NgClass, NgFor, NgIf } from '@angular/common';
@@ -11,12 +11,13 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 	standalone: true,
 	templateUrl: "./modal.component.html",
 	styleUrl: './modal.component.scss',
-	imports: [DragDropDirective, NgIf, NgFor, RouterLink, NgClass]
+	imports: [DragDropDirective, NgIf, NgFor, RouterLink, NgClass],
+	
 })
 export class ModalComponent {
 
-	
-	constructor(private fileTransferService: ExtractFileService, private sanitizer: DomSanitizer){}
+	constructor(private fileTransferService: ExtractFileService, private sanitizer: DomSanitizer) {}
+
 	@Input() name: string;
   	activeModal = inject(NgbActiveModal);
   	file: FileHandle | null = null;
@@ -24,6 +25,7 @@ export class ModalComponent {
 
 	sendFile(): void {
 		if (this.file) {
+			//this.fileTransferService.extractAndSendFile();
 			this.fileTransferService.sendFile(this.file);
 			this.activeModal.dismiss('Cross click');
 		}

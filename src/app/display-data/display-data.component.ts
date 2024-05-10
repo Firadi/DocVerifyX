@@ -25,7 +25,7 @@ export class DisplayDataComponent {
       this.file = file;
       if (this.file === null) this.router.navigate(['']);
       
-      // extracting file here
+     
     });
   }
 }

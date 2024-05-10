@@ -6,5 +6,8 @@
 body {
     font-family: Arial, sans-serif;
     background-color: #f6f6f5;
-    
+    user-select: none;
+}
+img {
+    -webkit-user-drag: none;
 }

@@ -25,7 +25,6 @@ export class ModalComponent {
 
 	sendFile(): void {
 		if (this.file) {
-			
 			this.fileTransferService.sendFile(this.file);
 			this.activeModal.dismiss('Cross click');
 		}

@@ -14,7 +14,9 @@ import { ModalComponent } from '../modal/modal.component';
 export class StartComponent {
 
   
-  constructor(private modalService: NgbModal = inject(NgbModal)) {}
+  constructor(private modalService: NgbModal = inject(NgbModal)) {
+    this.modalService.open(ModalComponent, { size: 'xl', centered: true, modalDialogClass: 'bg' })
+  }
 
 	open() {
 		const modalRef = this.modalService.open(ModalComponent, { size: 'xl', centered: true, modalDialogClass: 'bg' });

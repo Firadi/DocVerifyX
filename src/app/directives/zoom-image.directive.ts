@@ -8,7 +8,7 @@ export class ZoomImageDirective {
   
   @Input() width: number = 500;
 
-  @Input() zoomMax: number = 500;
+  @Input() zoomMax: number = 700;
 
   @Input() zoomMin: number = 100;
 
@@ -19,7 +19,7 @@ export class ZoomImageDirective {
   constructor() { }
 
   @HostListener('click') onClick() {
-      this.width = parseInt(this.zoomTarget.style.width) ? parseInt(this.zoomTarget.style.width) : 500;
+      this.width = parseInt(this.zoomTarget.style.width) ? parseInt(this.zoomTarget.style.width) : 700;
       if (this.zoomDirection === 'zoom-in' && this.zoomMax > this.width ) {
         this.width += 25;
         this.zoom(this.width);

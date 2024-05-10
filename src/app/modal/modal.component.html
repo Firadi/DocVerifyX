@@ -19,19 +19,19 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-12 btns">
-                    
-                    <button class="my-btn" (click)="sendFile()" routerLink="verification" [disabled]="(file === null)" [ngClass]="{'disabled-btn': (file === null)}">Extract</button>
-                    <button class="my-btn outline" aria-label="Close" (click)="activeModal.dismiss('Cross click')">cancel</button>
-                </div>
+                
             </div>
         </div>
         <div class="col-6">
             <div class="right-box">
                 <div class="col-12 title">
-                    <h2>test</h2>
+                    <h2>From Lien</h2>
                 </div>
             </div>
+        </div>
+        <div class="col-12 btns">
+            <button class="my-btn" (click)="sendFile()" routerLink="verification" [disabled]="(file === null)" [ngClass]="{'disabled-btn': (file === null)}">Extract</button>
+            <button class="my-btn outline" aria-label="Close" (click)="activeModal.dismiss('Cross click')">cancel</button>
         </div>
     </div>
 </div>

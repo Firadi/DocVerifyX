@@ -8,7 +8,7 @@
             </div>
           </div>
       <!-- Upload Area -->
-      <div class="col-md-6 vertical-line col1">
+      <div class="col-md-6  col1">
         
         <div class="image-settings">
             <i class="fa-regular fa-magnifying-glass-plus" [appZoomImage] [zoomTarget]="target"></i>
@@ -22,7 +22,7 @@
   
       <!-- Personal Info Form -->
       <div class="col-md-6">
-            <form class="personal-info-form" *ngIf="dataLoaded; else loadingSpinner">
+            <form class="personal-info-form" *ngIf="dataLoaded">
             <!-- First Name and Last Name -->
             <div class="row">
                 <div class="col-md-6">
@@ -96,14 +96,17 @@
             </form>
         
             <!-- Loading Spinner Template -->
-            <ng-template #loadingSpinner>
-            <div class="text-center spinner">
+            
+            <div class="text-center spinner" *ngIf="!dataLoaded && !dataLoadedError">
                 <mat-spinner diameter="160" color="primary"></mat-spinner>
                 <p>
                     Extracting Image...
                 </p>
             </div>
-            </ng-template>
+            
+            <div class="text-danger" *ngIf="dataLoadedError">
+                Error
+            </div>
 
       </div>
     </div>

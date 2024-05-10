@@ -20,6 +20,7 @@ import { ZoomImageDirective } from '../directives/zoom-image.directive';
 export class DisplayDataComponent {
   data: any;
   dataLoaded:boolean;
+  dataLoadedError:boolean;
 
   constructor(
     private fileTransferService: ExtractFileService,
@@ -49,6 +50,7 @@ export class DisplayDataComponent {
         // Handle the response data as needed
       },
       (error) => {
+        this.dataLoadedError = true;
         console.error('Error occurred while uploading the image:', error);
         // Handle the error appropriately
       }

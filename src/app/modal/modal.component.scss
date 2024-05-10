@@ -1,5 +1,20 @@
 .container{
     user-select: none;
+    .my-btn{
+        background-color: rgba(57, 109, 253, 1);
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+        color: white;
+        border: none;
+        padding: 7px 25px;
+        border-radius: 27px;
+        font-size: 17px;
+        cursor: pointer;
+    }
+    .outline{
+        color: rgba(57, 109, 253, 1);
+        background-color: rgba(244, 246, 245, 1);
+        border: solid 2px rgba(57, 109, 253, 1);
+    }
     .left-box{
         .drop-zone{
             background-color: rgba(242, 242, 255, 1);
@@ -13,22 +28,7 @@
                 margin-bottom: 50px;
             }
         }
-        .my-btn{
-            background-color: rgba(57, 109, 253, 1);
-            box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-            color: white;
-            border: none;
-            padding: 7px 25px;
-            border-radius: 27px;
-            font-size: 17px;
-            cursor: pointer;
-        }
-        .outline{
-            color: rgba(57, 109, 253, 1);
-            background-color: rgba(244, 246, 245, 1);
-            border: solid 2px rgba(57, 109, 253, 1);
-        }
-        
+       
         .file-input-container {
             position: relative;
             display: inline-block;
@@ -70,7 +70,7 @@
     margin-bottom: 30px;
     display: flex;
     justify-content: center;
-    gap: 75px;
+    gap: 15px;
     .disabled-btn{
         border-radius: 27px !important;
         font-size: 18px !important;

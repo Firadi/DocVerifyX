@@ -20,6 +20,7 @@
                     </div>
                 </div>
                 <div class="col-12 btns">
+                    
                     <button class="my-btn" (click)="sendFile()" routerLink="verification" [disabled]="(file === null)" [ngClass]="{'disabled-btn': (file === null)}">Extract</button>
                     <button class="my-btn outline" aria-label="Close" (click)="activeModal.dismiss('Cross click')">cancel</button>
                 </div>

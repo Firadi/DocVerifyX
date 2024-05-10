@@ -1,70 +1,111 @@
-<div class="logo">
-        <img src="assets/images/logo.jpeg" alt="Logo" routerLink="">
-    
-</div>
 <div class="container">
-    <div class="upload-area">
-        <img [src]="file.url" alt="Upload" class="upload-icon"/>
-        <div class="image-settings">
-            <i class="fa-regular fa-magnifying-glass-plus"></i>
-            <i class="fa-solid fa-rotate-left"></i>
-            <i class="fa-solid fa-rotate-right"></i>
-            <i class="fa-regular fa-magnifying-glass-minus"></i>
-        </div>
-    </div>
     
-    <!-- vertical line in the middle of the page -->
-    <div class="vertical-line"></div>
-
-    <form class="personal-info-form">
-        <div class="personal-info">
-            <div>
-                <label for="first-name">First Name</label>
-                <input type="text" id="first-name" value="{{ data.firstName }}">
+    <!-- Main Content Section -->
+    <div class="row">
+        <div class="col-12">
+            <div class="logo">
+              <img src="assets/images/logo.jpeg" alt="Logo" routerLink="/" >
             </div>
-
-            <div>
-                <label for="last-name">Last Name</label>
-                <input type="text" class="warning" id="last-name" value="{{ data.lastName }}">
-            </div>
+          </div>
+      <!-- Upload Area -->
+      <div class="col-md-6 vertical-line col1">
+        
+        <div class="image-settings">
+            <i class="fa-regular fa-magnifying-glass-plus" [appZoomImage] [zoomTarget]="target"></i>
+            <i class="fa-solid fa-rotate-left" [appZoomImage]="'rotate-right'" [zoomTarget]="target"></i>
+            <i class="fa-solid fa-rotate-right" [appZoomImage]="'rotate-left'" [zoomTarget]="target"></i>
+            <i class="fa-regular fa-magnifying-glass-minus" [appZoomImage]="'zoom-out'" [zoomTarget]="target" ></i>
         </div>
-
-        <div class="personal-info">
-            <div>
-                <label for="passport-number">Passport Number</label>
-                <input type="text" id="passport-number" value="{{ data.Npass }}">
+        <img [src]="file?.url" alt="Upload" class="upload-icon" #target>
+        
+      </div>
+  
+      <!-- Personal Info Form -->
+      <div class="col-md-6">
+            <form class="personal-info-form" *ngIf="dataLoaded; else loadingSpinner">
+            <!-- First Name and Last Name -->
+            <div class="row">
+                <div class="col-md-6">
+                <div class="form-group">
+                    <label for="first-name">First Name</label>
+                    <input type="text" id="first-name" class="form-control" [value]="data?.firstName">
+                </div>
+                </div>
+                <div class="col-md-6">
+                <div class="form-group">
+                    <label for="last-name">Last Name</label>
+                    <input type="text" id="last-name" class="form-control warning" [value]="data?.lastName">
+                </div>
+                </div>
             </div>
-
-            <div>
-                <label for="national-id">National ID (N CIN)</label>
-                <input type="text" class="warning" class="warning" id="national-id" value="{{ data.cin }}">
+        
+            <!-- Passport Number and National ID -->
+            <div class="row">
+                <div class="col-md-6">
+                <div class="form-group">
+                    <label for="passport-number">Passport Number</label>
+                    <input type="text" id="passport-number" class="form-control" [value]="data?.Npass">
+                </div>
+                </div>
+                <div class="col-md-6">
+                <div class="form-group">
+                    <label for="national-id">National ID (N CIN)</label>
+                    <input type="text" id="national-id" class="form-control warning" [value]="data?.cin">
+                </div>
+                </div>
             </div>
-        </div>
-
-        <div class="personal-info">
-            <div>
-                <label for="date-of-issuance">Date of Issuance</label>
-                <input type="text" id="date-of-issuance" value="{{ data.doi }}">
+        
+            <!-- Date of Issuance and Date of Expiry -->
+            <div class="row">
+                <div class="col-md-6">
+                <div class="form-group">
+                    <label for="date-of-issuance">Date of Issuance</label>
+                    <input type="text" id="date-of-issuance" class="form-control" [value]="data?.doi">
+                </div>
+                </div>
+                <div class="col-md-6">
+                <div class="form-group">
+                    <label for="date-of-expiry">Date of Expiry</label>
+                    <input type="text" id="date-of-expiry" class="form-control" [value]="data?.doe">
+                </div>
+                </div>
             </div>
-
-            <div>
-                <label for="date-of-expiry">Date of Expiry</label>
-                <input type="text" id="date-of-expiry" value="{{ data.doe }}">
+        
+            <!-- Date of Birth and Place of Birth -->
+            <div class="row">
+                <div class="col-md-6">
+                <div class="form-group">
+                    <label for="date-of-birth">Date of Birth</label>
+                    <input type="text" id="date-of-birth" class="form-control warning" [value]="data?.dob">
+                </div>
+                </div>
+                <div class="col-md-6">
+                <div class="form-group">
+                    <label for="place-of-birth">Place of Birth</label>
+                    <input type="text" id="place-of-birth" class="form-control" [value]="data?.prefecture">
+                </div>
+                </div>
             </div>
-        </div>
-
-        <div class="personal-info">
-            <div>
-                <label for="date-of-birth">Date of Birth</label>
-                <input type="text" id="date-of-birth" class="warning" value="{{ data.dob }}">
+        
+            <!-- Submit Button -->
+            <div class="row">
+                <div class="col-md-12">
+                <button type="button" class="btn btn-primary">Submit</button>
+                </div>
             </div>
-
-            <div>
-                <label for="place-of-birth">Place of Birth</label>
-                <input type="text" id="place-of-birth" value="{{ data.prefecture }}">
+            </form>
+        
+            <!-- Loading Spinner Template -->
+            <ng-template #loadingSpinner>
+            <div class="text-center spinner">
+                <mat-spinner diameter="160" color="primary"></mat-spinner>
+                <p>
+                    Extracting Image...
+                </p>
             </div>
-        </div>
+            </ng-template>
 
-        <button type="button">Submit</button>
-    </form>
+      </div>
+    </div>
 </div>
+  

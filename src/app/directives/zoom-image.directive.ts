@@ -8,11 +8,11 @@ export class ZoomImageDirective {
   
   @Input() width: number = 500;
 
-  @Input() zoomMax: number = 1000;
+  @Input() zoomMax: number = 500;
 
   @Input() zoomMin: number = 100;
 
-  @Input('appZoom') zoomDirection: 'in' | 'out' = 'in'; 
+  @Input('appZoomImage') zoomDirection: 'zoom-in' | 'zoom-out' | 'rotate-right' | 'rotate-left' = 'zoom-in'; 
 
   @Input() zoomTarget !: HTMLElement;
   
@@ -20,19 +20,31 @@ export class ZoomImageDirective {
 
   @HostListener('click') onClick() {
       this.width = parseInt(this.zoomTarget.style.width) ? parseInt(this.zoomTarget.style.width) : 500;
-      if (this.zoomDirection === 'in' && this.zoomMax > this.width ) {
+      if (this.zoomDirection === 'zoom-in' && this.zoomMax > this.width ) {
         this.width += 25;
+        this.zoom(this.width);
         console.log("in");
-      }else if (this.zoomDirection === 'out' && this.width > this.zoomMin) {
+      }else if (this.zoomDirection === 'zoom-out' && this.width > this.zoomMin) {
         this.width -= 25;
+        this.zoom(this.width);
         console.log("out");
-
+      }else {
+        this.rotate(this.zoomDirection)
       }
-      this.zoom(this.width);
+      
   }
 
   private zoom(width: number){
     this.zoomTarget.style.width = width + 'px';
+  }
+  private rotate(direction){
+    let currentRotation = parseInt(this.zoomTarget.style.transform.replace('rotate(', '').replace('deg)', '')) || 0;
+    const rotationIncrement = direction === 'rotate-left' ? 90 : (direction === 'rotate-right')? -90 : false;
+
+    if (rotationIncrement !== false ) {
+      const newRotation = currentRotation + rotationIncrement;
+      this.zoomTarget.style.transform = `rotate(${newRotation}deg)`;
+    }
   }
   
 

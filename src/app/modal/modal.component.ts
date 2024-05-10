@@ -1,6 +1,6 @@
 import { Component, Input, inject } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { DragDropDirective, FileHandle } from '../drag-drop.directive';
+import { DragDropDirective, FileHandle } from '../directives/drag-drop.directive';
 import { NgClass, NgFor, NgIf } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { ExtractFileService } from '../extract-file.service';

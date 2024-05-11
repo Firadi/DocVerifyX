@@ -1,0 +1,12 @@
+version: '3.1'
+
+services:
+  backend:
+    build: .
+    restart: on-failure
+    ports:
+      - "5555:5555"
+      - "3000:3000"
+    working_dir: /app
+    volumes:
+      - .:/app

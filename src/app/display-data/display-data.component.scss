@@ -12,8 +12,18 @@
     display: flex;
     align-items: center;
     flex-direction: column;
+    .box {
+        width: 100%; /* Set the width of the image container */
+        height: 500px; /* Set the height of the image container */
+        overflow: auto; /* Hide any content that exceeds the container's dimensions */
+        position: relative; /* Positioning context for absolutely positioned children (like the image) */
+        background: white;
+    }
     img{
-        width: 100%;
+        width: 100%; /* Ensure the image takes up 100% of its parent container's width */
+        height: auto; /* Allow the height to adjust proportionally based on width */
+        transform-origin: center; /* Set the transform origin to the top left corner */
+        transition: transform 0.3s ease; 
     }
 }
 
@@ -23,6 +33,8 @@
     width: 100%;
     padding: 20px;
     border-radius: 10px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
     z-index: 20;
     background-color: #E3E3F0;
 }

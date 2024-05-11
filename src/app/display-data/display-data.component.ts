@@ -5,7 +5,7 @@ import { FileHandle } from '../directives/drag-drop.directive';
 import { Router } from '@angular/router';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
-import { NgIf } from '@angular/common';
+import { NgClass, NgIf } from '@angular/common';
 import { ZoomImageDirective } from '../directives/zoom-image.directive';
 
 
@@ -13,7 +13,7 @@ import { ZoomImageDirective } from '../directives/zoom-image.directive';
 @Component({
   selector: 'app-display-data',
   standalone: true,
-  imports: [RouterLink, MatProgressSpinnerModule, NgIf, ZoomImageDirective],
+  imports: [RouterLink, MatProgressSpinnerModule, NgIf, ZoomImageDirective, NgClass],
   templateUrl: './display-data.component.html',
   styleUrl: './display-data.component.scss'
 })

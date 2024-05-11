@@ -22,19 +22,22 @@
   
       <!-- Personal Info Form -->
       <div class="col-md-6">
-            <form class="personal-info-form" *ngIf="dataLoaded">
+        <form class="personal-info-form" *ngIf="dataLoaded || dataLoadedError">
+            <div class="text-danger" *ngIf="dataLoadedError">
+                Extarcting data error
+            </div>
             <!-- First Name and Last Name -->
             <div class="row">
                 <div class="col-md-6">
                 <div class="form-group">
                     <label for="first-name">First Name</label>
-                    <input type="text" id="first-name" class="form-control" [value]="data?.firstName">
+                    <input type="text" id="first-name" class="form-control" [value]="data?.firstName" [ngClass]="{'error':dataLoadedError}">
                 </div>
                 </div>
                 <div class="col-md-6">
                 <div class="form-group">
                     <label for="last-name">Last Name</label>
-                    <input type="text" id="last-name" class="form-control warning" [value]="data?.lastName">
+                    <input type="text" id="last-name" class="form-control" [value]="data?.lastName" [ngClass]="{'error':dataLoadedError}">
                 </div>
                 </div>
             </div>
@@ -44,13 +47,13 @@
                 <div class="col-md-6">
                 <div class="form-group">
                     <label for="passport-number">Passport Number</label>
-                    <input type="text" id="passport-number" class="form-control" [value]="data?.Npass">
+                    <input type="text" id="passport-number" class="form-control" [value]="data?.Npass" [ngClass]="{'error':dataLoadedError}">
                 </div>
                 </div>
                 <div class="col-md-6">
                 <div class="form-group">
                     <label for="national-id">National ID (N CIN)</label>
-                    <input type="text" id="national-id" class="form-control warning" [value]="data?.cin">
+                    <input type="text" id="national-id" class="form-control" [value]="data?.cin" [ngClass]="{'error':dataLoadedError}">
                 </div>
                 </div>
             </div>
@@ -60,13 +63,13 @@
                 <div class="col-md-6">
                 <div class="form-group">
                     <label for="date-of-issuance">Date of Issuance</label>
-                    <input type="text" id="date-of-issuance" class="form-control" [value]="data?.doi">
+                    <input type="text" id="date-of-issuance" class="form-control" [value]="data?.doi" [ngClass]="{'error':dataLoadedError}">
                 </div>
                 </div>
                 <div class="col-md-6">
                 <div class="form-group">
                     <label for="date-of-expiry">Date of Expiry</label>
-                    <input type="text" id="date-of-expiry" class="form-control" [value]="data?.doe">
+                    <input type="text" id="date-of-expiry" class="form-control" [value]="data?.doe" [ngClass]="{'error':dataLoadedError}">
                 </div>
                 </div>
             </div>
@@ -76,13 +79,13 @@
                 <div class="col-md-6">
                 <div class="form-group">
                     <label for="date-of-birth">Date of Birth</label>
-                    <input type="text" id="date-of-birth" class="form-control warning" [value]="data?.dob">
+                    <input type="text" id="date-of-birth" class="form-control" [value]="data?.dob" [ngClass]="{'error':dataLoadedError}">
                 </div>
                 </div>
                 <div class="col-md-6">
                 <div class="form-group">
                     <label for="place-of-birth">Place of Birth</label>
-                    <input type="text" id="place-of-birth" class="form-control" [value]="data?.prefecture">
+                    <input type="text" id="place-of-birth" class="form-control warning" [value]="data?.prefecture" [ngClass]="{'error':dataLoadedError}">
                 </div>
                 </div>
             </div>
@@ -93,7 +96,7 @@
                 <button type="button" class="btn btn-primary">Submit</button>
                 </div>
             </div>
-            </form>
+        </form>
         
             <!-- Loading Spinner Template -->
             
@@ -104,9 +107,7 @@
                 </p>
             </div>
             
-            <div class="text-danger" *ngIf="dataLoadedError">
-                Error
-            </div>
+            
 
       </div>
     </div>

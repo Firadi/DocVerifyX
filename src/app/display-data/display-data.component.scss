@@ -35,7 +35,7 @@
 }
 
 .personal-info-form{
-    margin-top: 90px;
+    margin-top: 50px;
     label {
         display: block;
         margin-top: 10px;
@@ -61,6 +61,11 @@
     color: #000 !important;
     background-color: #fff !important;
     border: 2px solid #E7BA46 !important;
+}
+.error{
+    color: #000 !important;
+    background-color: #fff !important;
+    border: 1px solid #e74646 !important;
 }
 
 button {

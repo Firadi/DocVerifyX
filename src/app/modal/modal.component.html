@@ -24,9 +24,25 @@
         </div>
         <div class="col-6">
             <div class="right-box">
-                <div class="col-12 title">
-                    <h2>From Lien</h2>
+                <div class="row d-flex align-items-center">
+
+                    <div class="col-12 title">
+                        <h2>From Lien</h2>
+                    </div>
+                    <div class="col-12 input mb-3">
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Image URL</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" #imageUrlInput>
+                            <div id="emailHelp" class="form-text">paste an image URL</div>
+                        </div>
+                        <button class="btn btn-primary" (click)="loadImageFromUrl()">Downoad</button>
+                    </div>
+                    <!-- <div class="col-12">
+                        <img [src]="imageUrl" alt="" class="img100 mb-2">
+                    </div> -->
+                    
                 </div>
+                
             </div>
         </div>
         <div class="col-12 btns">

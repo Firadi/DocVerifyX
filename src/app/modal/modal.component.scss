@@ -57,6 +57,9 @@
             font-size: 22px;
         }   
     }
+    .right-box{
+        height: 100%;
+    }
     h2{
         font-size: 20px;
         font-weight: bold;
@@ -66,6 +69,7 @@
 .col-12.title{
     padding: 30px;
 }
+
 .col-12.btns{
     margin-bottom: 30px;
     display: flex;
@@ -95,4 +99,7 @@
 }
 .track{
     background: none;
+}
+.img100{
+    max-width: 65%;
 }

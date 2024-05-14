@@ -33,13 +33,13 @@
                 <div class="col-md-6">
                 <div class="form-group">
                     <label for="first-name">First Name</label>
-                    <input type="text" id="first-name" class="form-control" [value]="data?.firstName" [ngClass]="{'error':dataLoadedError}">
+                    <input type="text" id="first-name" class="form-control" [value]="data?.firstName" [ngClass]="{'error':dataLoadedError}" #inputElement>
                 </div>
                 </div>
                 <div class="col-md-6">
                 <div class="form-group">
                     <label for="last-name">Last Name</label>
-                    <input type="text" id="last-name" class="form-control" [value]="data?.lastName" [ngClass]="{'error':dataLoadedError}">
+                    <input type="text" id="last-name" class="form-control" [value]="data?.lastName" [ngClass]="{'error':dataLoadedError}" #inputElement>
                 </div>
                 </div>
             </div>
@@ -49,13 +49,13 @@
                 <div class="col-md-6">
                 <div class="form-group">
                     <label for="passport-number">Passport Number</label>
-                    <input type="text" id="passport-number" class="form-control" [value]="data?.Npass" [ngClass]="{'error':dataLoadedError}">
+                    <input type="text" id="passport-number" class="form-control" [value]="data?.Npass" [ngClass]="{'error':dataLoadedError}" #inputElement>
                 </div>
                 </div>
                 <div class="col-md-6">
                 <div class="form-group">
                     <label for="national-id">National ID (N CIN)</label>
-                    <input type="text" id="national-id" class="form-control" [value]="data?.cin" [ngClass]="{'error':dataLoadedError}">
+                    <input type="text" id="national-id" class="form-control" [value]="data?.cin" [ngClass]="{'error':dataLoadedError}" #inputElement>
                 </div>
                 </div>
             </div>
@@ -65,13 +65,13 @@
                 <div class="col-md-6">
                 <div class="form-group">
                     <label for="date-of-issuance">Date of Issuance</label>
-                    <input type="text" id="date-of-issuance" class="form-control" [value]="data?.doi" [ngClass]="{'error':dataLoadedError}">
+                    <input type="text" id="date-of-issuance" class="form-control" [value]="data?.doi" [ngClass]="{'error':dataLoadedError}" #inputElement>
                 </div>
                 </div>
                 <div class="col-md-6">
                 <div class="form-group">
                     <label for="date-of-expiry">Date of Expiry</label>
-                    <input type="text" id="date-of-expiry" class="form-control" [value]="data?.doe" [ngClass]="{'error':dataLoadedError}">
+                    <input type="text" id="date-of-expiry" class="form-control" [value]="data?.doe" [ngClass]="{'error':dataLoadedError}" #inputElement>
                 </div>
                 </div>
             </div>
@@ -81,13 +81,13 @@
                 <div class="col-md-6">
                 <div class="form-group">
                     <label for="date-of-birth">Date of Birth</label>
-                    <input type="text" id="date-of-birth" class="form-control" [value]="data?.dob" [ngClass]="{'error':dataLoadedError}">
+                    <input type="text" id="date-of-birth" class="form-control" [value]="data?.dob" [ngClass]="{'error':dataLoadedError}" #inputElement>
                 </div>
                 </div>
                 <div class="col-md-6">
                 <div class="form-group">
                     <label for="place-of-birth">Place of Birth</label>
-                    <input type="text" id="place-of-birth" class="form-control warning" [value]="data?.prefecture" [ngClass]="{'error':dataLoadedError}">
+                    <input type="text" id="place-of-birth" class="form-control warning" [value]="data?.prefecture" [ngClass]="{'error':dataLoadedError}" #inputElement>
                 </div>
                 </div>
             </div>
@@ -95,7 +95,10 @@
             <!-- Submit Button -->
             <div class="row">
                 <div class="col-md-12">
-                <button type="button" class="btn btn-primary">Submit</button>
+                    <button type="button" class="btn btn-primary me-2">Submit</button>
+                    <button type="button" class="btn btn-success" (click)="downloadJson()">Download as JSON</button>
+                </div>
+                <div class="col-md-6">
                 </div>
             </div>
         </form>

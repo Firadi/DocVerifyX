@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, QueryList, ViewChildren } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ExtractFileService } from '../extract-file.service';
 import { FileHandle } from '../directives/drag-drop.directive';
@@ -21,13 +21,13 @@ export class DisplayDataComponent {
   data: any;
   dataLoaded:boolean;
   dataLoadedError:boolean;
+  @ViewChildren('inputElement') inputElements: QueryList<ElementRef>;
 
   constructor(
     private fileTransferService: ExtractFileService,
     private router: Router,
-    
-    
   ){}
+
   file:FileHandle | null = null; 
   
   ngOnInit(): void {
@@ -36,8 +36,7 @@ export class DisplayDataComponent {
       if (this.file === null) this.router.navigate([''])
       else this.extractFileData();
     });
-    
-    console.log(this.data);
+
   }
 
   extractFileData(): void {
@@ -56,5 +55,32 @@ export class DisplayDataComponent {
       }
     );
     
+  }
+  downloadJson() {
+    // Initialize an object to store input values
+    const data = {};
+
+    // Loop through all input elements
+    this.inputElements.forEach(inputElement => {
+      // Get the input's id and value and add it to the data object
+      const id = inputElement.nativeElement.id;
+      const value = inputElement.nativeElement.value;
+      data[id] = value;
+      
+    });
+    // Convert object to JSON string
+    const jsonData = JSON.stringify(data);
+
+    // Create Blob and initiate download (same as previous examples)
+    const blob = new Blob([jsonData], { type: 'application/json' });
+    const url = window.URL.createObjectURL(blob);
+
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'data.json';
+    document.body.appendChild(a);
+    a.click();
+    window.URL.revokeObjectURL(url);
+    document.body.removeChild(a);
   }
 }

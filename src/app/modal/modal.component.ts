@@ -30,21 +30,23 @@ export class ModalComponent {
 
 	loadImageFromUrl(){
 		this.imageUrl = this.imageUrlInput.nativeElement.value;
-		this.http.get(this.imageUrl, { responseType: 'blob' }).subscribe(
-			(blob: Blob) => {
-			  // Create a new File instance from the fetched Blob
-			  const file = new File([blob], 'image.jpg', { type: 'image/jpeg' });
-	  
-			  // Create a SafeUrl for displaying the image
-			  const url: SafeUrl = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(file));
-	  
-			  // Assign the FileHandle object to the 'file' variable
-			  this.file = { file: file, url: url };
-			},
-			(error) => {
-			  console.error('Error fetching image:', error);
-			}
-		  );
+		if (this.imageUrl !== "") {
+			this.http.get(this.imageUrl, { responseType: 'blob' }).subscribe(
+				(blob: Blob) => {
+				  // Create a new File instance from the fetched Blob
+				  const file = new File([blob], 'image.jpg', { type: 'image/jpeg' });
+		  
+				  // Create a SafeUrl for displaying the image
+				  const url: SafeUrl = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(file));
+		  
+				  // Assign the FileHandle object to the 'file' variable
+				  this.file = { file: file, url: url };
+				},
+				(error) => {
+				  console.error('Error fetching image:', error);
+				}
+			  );
+		}
 	}
 	sendFile(): void {
 		if (this.file) {

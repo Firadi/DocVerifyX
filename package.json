@@ -5,12 +5,11 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "electron": "ng build --base-href ./ && electron .",
-    "dist":"ng build --base-href ./ && electron-buider",
     "build": "ng build",
-  
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "electron": "ng build --base-href ./ && electron .",
+	  "dist": "ng build --base-href ./ && electron-builder"
   },
   "private": true,
   "dependencies": {

@@ -1,10 +1,10 @@
-import { Component, ElementRef, QueryList, ViewChildren } from '@angular/core';
+import { Component, ElementRef, HostListener, QueryList, ViewChildren } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ExtractFileService } from '../extract-file.service';
 import { FileHandle } from '../directives/drag-drop.directive';
 import { Router } from '@angular/router';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-
+import { Clipboard } from '@angular/cdk/clipboard';
 import { NgClass, NgIf } from '@angular/common';
 import { ZoomImageDirective } from '../directives/zoom-image.directive';
 
@@ -26,6 +26,7 @@ export class DisplayDataComponent {
   constructor(
     private fileTransferService: ExtractFileService,
     private router: Router,
+    private clipboard: Clipboard
   ){}
 
   file:FileHandle | null = null; 
@@ -38,7 +39,12 @@ export class DisplayDataComponent {
     });
 
   }
-
+  @HostListener('document:keydown.a', ['$event'])
+  @HostListener('document:keydown.A', ['$event'])
+  handleShortcut(event: KeyboardEvent) {
+    event.preventDefault(); 
+    this.copyAsTabSeparateValues();
+  }
   extractFileData(): void {
     this.dataLoaded = false;
     this.fileTransferService.extractFile(this.file).subscribe(
@@ -82,5 +88,32 @@ export class DisplayDataComponent {
     a.click();
     window.URL.revokeObjectURL(url);
     document.body.removeChild(a);
+  }
+  copyAsTabSeparateValues(){
+    const data = {};
+
+    // Loop through all input elements
+    this.inputElements.forEach(inputElement => {
+      
+      const id = inputElement.nativeElement.id;
+      const value = inputElement.nativeElement.value;
+      data[id] = value;
+      
+    });
+    console.log(data);
+
+    let textToCopy = "";
+    textToCopy = textToCopy.concat(
+      data["last-name"],"\t",
+      data["first-name"],"\t",
+      data["date-of-birth"],"\t",
+      data["passport-number"],"\t",
+      data["date-of-issuance"],"\t",
+      data["date-of-expiry"],"\t",
+      data["place-of-birth"]
+    );
+    this.clipboard.copy(textToCopy);
+    
+    
   }
 }

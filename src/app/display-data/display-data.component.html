@@ -1,108 +1,18 @@
 <div class="container">
-    
     <!-- Main Content Section -->
     <div class="row">
         <div class="col-12">
             <div class="logo">
-              <img src="assets/images/logo.jpeg" alt="Logo" routerLink="/" >
+                <img src="assets/images/logo.jpeg" alt="Logo" routerLink="/" >
             </div>
-          </div>
-      <!-- Upload Area -->
-      <div class="col-md-6  col1">
+        </div>
+    <div class="col-md-6  col1">
         <app-image-box-controll [file]="file"></app-image-box-controll>
-      </div>
-  
+    </div>
       <!-- Personal Info Form -->
-      <div class="col-md-6">
-        <form class="personal-info-form" *ngIf="dataLoaded || dataLoadedError">
-            <div class="text-danger" *ngIf="dataLoadedError">
-                Extarcting data error
-            </div>
-            <!-- First Name and Last Name -->
-            <div class="row">
-                <div class="col-md-6">
-                <div class="form-group">
-                    <label for="first-name">First Name</label>
-                    <input type="text" id="first-name" class="form-control" [value]="data?.firstName" [ngClass]="{'error':dataLoadedError}" #inputElement>
-                </div>
-                </div>
-                <div class="col-md-6">
-                <div class="form-group">
-                    <label for="last-name">Last Name</label>
-                    <input type="text" id="last-name" class="form-control" [value]="data?.lastName" [ngClass]="{'error':dataLoadedError}" #inputElement>
-                </div>
-                </div>
-            </div>
-        
-            <!-- Passport Number and National ID -->
-            <div class="row">
-                <div class="col-md-6">
-                <div class="form-group">
-                    <label for="passport-number">Passport Number</label>
-                    <input type="text" id="passport-number" class="form-control" [value]="data?.Npass" [ngClass]="{'error':dataLoadedError}" #inputElement>
-                </div>
-                </div>
-                <div class="col-md-6">
-                <div class="form-group">
-                    <label for="national-id">National ID (N CIN)</label>
-                    <input type="text" id="national-id" class="form-control" [value]="data?.cin" [ngClass]="{'error':dataLoadedError}" #inputElement>
-                </div>
-                </div>
-            </div>
-        
-            <!-- Date of Issuance and Date of Expiry -->
-            <div class="row">
-                <div class="col-md-6">
-                <div class="form-group">
-                    <label for="date-of-issuance">Date of Issuance</label>
-                    <input type="text" id="date-of-issuance" class="form-control" [value]="data?.doi" [ngClass]="{'error':dataLoadedError}" #inputElement>
-                </div>
-                </div>
-                <div class="col-md-6">
-                <div class="form-group">
-                    <label for="date-of-expiry">Date of Expiry</label>
-                    <input type="text" id="date-of-expiry" class="form-control" [value]="data?.doe" [ngClass]="{'error':dataLoadedError}" #inputElement>
-                </div>
-                </div>
-            </div>
-        
-            <!-- Date of Birth and Place of Birth -->
-            <div class="row">
-                <div class="col-md-6">
-                <div class="form-group">
-                    <label for="date-of-birth">Date of Birth</label>
-                    <input type="text" id="date-of-birth" class="form-control" [value]="data?.dob" [ngClass]="{'error':dataLoadedError}" #inputElement>
-                </div>
-                </div>
-                <div class="col-md-6">
-                <div class="form-group">
-                    <label for="place-of-birth">Place of Birth</label>
-                    <input type="text" id="place-of-birth" class="form-control warning" [value]="data?.prefecture" [ngClass]="{'error':dataLoadedError}" #inputElement>
-                </div>
-                </div>
-            </div>
-        
-            <!-- Submit Button -->
-            <div class="row">
-                <div class="col-md-12">
-                    <button type="button" class="btn btn-primary me-2">Submit</button>
-                    <button type="button" class="btn btn-success me-2" (click)="downloadJson()">Download as JSON</button>
-                    <button type="button" class="btn btn-success" (click)="copyAsTabSeparateValues()">Copy</button>
-                </div>
-                <div class="col-md-6">
-                </div>
-            </div>
-        </form>
-        
-            <!-- Loading Spinner Template -->
-            
-            <div class="text-center spinner" *ngIf="!dataLoaded && !dataLoadedError">
-                <mat-spinner diameter="160" color="primary"></mat-spinner>
-                <p>
-                    Extracting Image...
-                </p>
-            </div>
-      </div>
+        <div class="col-md-6">
+            <app-data-form (sendFileToParent)="this.file = $event"></app-data-form>
+        </div>
     </div>
 </div>
   

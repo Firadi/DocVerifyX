@@ -1,0 +1,168 @@
+<form class="personal-info-form" *ngIf="dataLoaded || dataLoadedError" [formGroup]="myForm">
+    <div class="text-danger" *ngIf="dataLoadedError">
+        Extarcting data error
+    </div>
+    <!-- First Name and Last Name -->
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="first-name">First Name</label>
+                <input 
+                    type="text" 
+                    id="first-name" 
+                    class="form-control" 
+                    [ngClass]="{ 'warning': isInvalid('first-name') }" 
+                    formControlName="first-name" 
+                    #inputElement
+                >
+                <div *ngIf="shouldShowError('first-name')" class="text-danger">
+                    <div *ngIf="getError('first-name', 'required')">First name is required.</div>
+                    <div *ngIf="getError('first-name', 'pattern')">First name must contain only letters.</div>
+                </div>
+            </div>            
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="last-name">Last Name</label>
+                <input 
+                    type="text" 
+                    id="last-name" 
+                    class="form-control" 
+                    [ngClass]="{ 'warning': isInvalid('last-name') }" 
+                    formControlName="last-name"
+                >
+                <div *ngIf="shouldShowError('last-name')" class="text-danger">
+                    <div *ngIf="getError('last-name', 'required')">Last name is required.</div>
+                    <div *ngIf="getError('last-name', 'pattern')">Last name must contain only letters.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Passport Number and National ID -->
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="passport-number">Passport Number</label>
+            <input 
+                type="text" 
+                id="passport-number" 
+                class="form-control" 
+                [ngClass]="{ 'warning': isInvalid('passport-number') }" 
+                formControlName="passport-number"
+            >
+            <div *ngIf="shouldShowError('passport-number')" class="text-danger">
+                <div *ngIf="getError('passport-number', 'required')">Passport number is required.</div>
+                <div *ngIf="getError('passport-number', 'pattern')">Invalid passport number format.</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="national-id">National ID (N CIN)</label>
+            <input 
+                type="text" 
+                id="national-id" 
+                class="form-control" 
+                [ngClass]="{ 'error': getError('national-id', 'required'),'warning': isInvalid('national-id') }" 
+                formControlName="national-id"
+            >
+            <div *ngIf="shouldShowError('national-id')" class="text-danger">
+                <div *ngIf="getError('national-id', 'required')">National ID is required.</div>
+                <div *ngIf="getError('national-id', 'pattern')">Invalid national ID format.</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Date of Issuance and Date of Expiry -->
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="date-of-issuance">Date of Issuance</label>
+            <input 
+                type="text" 
+                id="date-of-issuance" 
+                class="form-control" 
+                [ngClass]="{ 'warning': isInvalid('date-of-issuance') }" 
+                formControlName="date-of-issuance"
+            >
+            <div *ngIf="shouldShowError('date-of-issuance')" class="text-danger">
+                <div *ngIf="getError('date-of-issuance', 'required')">Date of issuance is required.</div>
+                <div *ngIf="getError('date-of-issuance', 'pattern')">Invalid date format.</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="date-of-expiry">Date of Expiry</label>
+            <input 
+                type="text" 
+                id="date-of-expiry" 
+                class="form-control" 
+                [ngClass]="{ 'warning': isInvalid('date-of-expiry') }" 
+                formControlName="date-of-expiry"
+            >
+            <div *ngIf="shouldShowError('date-of-expiry')" class="text-danger">
+                <div *ngIf="getError('date-of-expiry', 'required')">Date of expiry is required.</div>
+                <div *ngIf="getError('date-of-expiry', 'pattern')">Invalid date format.</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Date of Birth and Place of Birth -->
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="date-of-birth">Date of Birth</label>
+            <input 
+                type="text" 
+                id="date-of-birth" 
+                class="form-control" 
+                [ngClass]="{ 'warning': isInvalid('date-of-birth') }" 
+                formControlName="date-of-birth"
+            >
+            <div *ngIf="shouldShowError('date-of-birth')" class="text-danger">
+                <div *ngIf="getError('date-of-birth', 'required')">Date of birth is required.</div>
+                <div *ngIf="getError('date-of-birth', 'pattern')">Invalid date format.</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="place-of-birth">Place of Birth</label>
+            <input 
+                type="text" 
+                id="place-of-birth" 
+                class="form-control" 
+                [ngClass]="{ 'warning': isInvalid('place-of-birth') }" 
+                formControlName="place-of-birth"
+            >
+            <div *ngIf="shouldShowError('place-of-birth')" class="text-danger">
+                <div *ngIf="getError('place-of-birth', 'required')">Place of birth is required.</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <!-- Submit Button -->
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <button type="button" class="btn btn-primary me-2">Submit</button>
+            <button type="button" class="btn btn-success me-2" (click)="downloadJson()">Download as JSON</button>
+            <button type="button" class="btn btn-success" (click)="copyAsTabSeparateValues()">Copy</button>
+        </div>
+        <div class="col-md-6">
+        </div>
+    </div>
+</form>
+
+    <!-- Loading Spinner Template -->
+
+<div class="text-center spinner" *ngIf="!dataLoaded && !dataLoadedError">
+    <mat-spinner diameter="160" color="primary"></mat-spinner>
+    <p>
+        Extracting Image...
+    </p>
+</div>

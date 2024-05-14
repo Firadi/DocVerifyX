@@ -60,8 +60,8 @@ export class DataFormComponent {
       'date-of-birth':    ['', [Validators.required, Validators.pattern(/^\d{2}\/\d{2}\/\d{4}$/)]],
       'date-of-expiry':   ['', [Validators.required, Validators.pattern(/^\d{2}\/\d{2}\/\d{4}$/)]],
       'date-of-issuance': ['', [Validators.required, Validators.pattern(/^\d{2}\/\d{2}\/\d{4}$/)]],
-      'first-name':       ['', [Validators.required, Validators.minLength(3), Validators.pattern(/^[a-zA-Z]+$/)]],
-      'last-name':        ['', [Validators.required, Validators.minLength(3), Validators.pattern(/^[a-zA-Z]+$/)]],
+      'first-name':       ['', [Validators.required, Validators.minLength(3), Validators.pattern(/^[a-zA-Z]{3,}(\s[a-zA-Z]{3,})*$/)]],
+      'last-name':        ['', [Validators.required, Validators.minLength(3), Validators.pattern(/^[a-zA-Z]{3,}(\s[a-zA-Z]{3,})*$/)]],
       'national-id':      ['', [Validators.required, Validators.pattern(/^([A-Za-z]{1,2}\d{5,7})$/)]],
       'passport-number':  ['', [Validators.required, Validators.pattern(/^([A-Za-z]{2}\d{7})$/)]],
       'place-of-birth':   ['', [Validators.required, Validators.minLength(3)]]

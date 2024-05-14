@@ -26,12 +26,15 @@ export class DataFormComponent {
   @HostListener('document:keydown.A', ['$event'])
   handleShortcut(event: KeyboardEvent) {
     event.preventDefault(); 
-    this.copyAsTabSeparateValues();
+    if (this.myForm.valid) {
+      this.copyAsTabSeparateValues();
+    }
   }
-  file:FileHandle | null = null;
+  file: FileHandle | null = null;
   data: any;
-  dataLoaded:boolean;
-  dataLoadedError:boolean;
+  dataLoaded: boolean;
+  dataLoadedError: boolean;
+  isFormValid: boolean = false;
   
   constructor(
     private fileTransferService: ExtractFileService,
@@ -42,26 +45,35 @@ export class DataFormComponent {
   ){
     
   }
+  
   ngOnInit(): void {
     this.fileTransferService.file$.subscribe(file => {
       this.file = file;
       this.sendFileToParent.emit(this.file);
-      if (this.file === null) this.router.navigate([''])
-      else this.processPassportImage();
+      if (this.file === null) {
+        this.router.navigate(['']);
+      } else {
+        this.processPassportImage();
+      }
     });
     this.myForm = this.fb.group({
-      'date-of-birth':    ['', [Validators.required, Validators.pattern(/^\d{2}\/\d{2}\/\d{4}$/) ]],
-      'date-of-expiry':   ['', [Validators.required, Validators.pattern(/^\d{2}\/\d{2}\/\d{4}$/) ]],
-      'date-of-issuance': ['', [Validators.required, Validators.pattern(/^\d{2}\/\d{2}\/\d{4}$/) ]],
-      'first-name':       ['', [Validators.required, Validators.minLength(3), Validators.pattern(/^[a-zA-Z]+$/) ]],
-      'last-name':        ['', [Validators.required, Validators.minLength(3), Validators.pattern(/^[a-zA-Z]+$/) ]],
-      'national-id':      ['', [Validators.required, Validators.pattern(/^([A-Za-z]{1,2}\d{5,7})$/) ]],
-      'passport-number':  ['', [Validators.required, Validators.pattern(/^([A-Za-z]{2}\d{7})$/) ]],
-      'place-of-birth':   ['', [Validators.required, Validators.minLength(3) ]]
+      'date-of-birth':    ['', [Validators.required, Validators.pattern(/^\d{2}\/\d{2}\/\d{4}$/)]],
+      'date-of-expiry':   ['', [Validators.required, Validators.pattern(/^\d{2}\/\d{2}\/\d{4}$/)]],
+      'date-of-issuance': ['', [Validators.required, Validators.pattern(/^\d{2}\/\d{2}\/\d{4}$/)]],
+      'first-name':       ['', [Validators.required, Validators.minLength(3), Validators.pattern(/^[a-zA-Z]+$/)]],
+      'last-name':        ['', [Validators.required, Validators.minLength(3), Validators.pattern(/^[a-zA-Z]+$/)]],
+      'national-id':      ['', [Validators.required, Validators.pattern(/^([A-Za-z]{1,2}\d{5,7})$/)]],
+      'passport-number':  ['', [Validators.required, Validators.pattern(/^([A-Za-z]{2}\d{7})$/)]],
+      'place-of-birth':   ['', [Validators.required, Validators.minLength(3)]]
     });
 
-    this.setFormValues()
+    this.myForm.statusChanges.subscribe(status => {
+      this.isFormValid = status === 'VALID';
+    });
+
+    this.setFormValues();
   }
+
   setFormValues() {
     // If data is available, update form controls' values
     if (this.data) {
@@ -73,10 +85,11 @@ export class DataFormComponent {
         'last-name': this.data['lastName'].trim() || '',
         'national-id': this.data['cin'].trim() || '',
         'passport-number': this.data['Npass'].trim() || '',
-        'place-of-birth':  this.data['prefecture'].trim() || '',
+        'place-of-birth':  this.data['prefecture'].trim() || ''
       });
     }
   }
+
   async processPassportImage() {
     this.dataLoaded = false;
     const file = this.file.file;
@@ -91,60 +104,61 @@ export class DataFormComponent {
       console.error('Error extracting data:', error);
     }
   }
+
   downloadJson() {
-    // Initialize an object to store input values
-    const data = {};
+    if (this.isFormValid) {
+      // Initialize an object to store input values
+      const data = {};
 
-    // Loop through all input elements
-    this.inputElements.forEach(inputElement => {
-      // Get the input's id and value and add it to the data object
-      const id = inputElement.nativeElement.id;
-      const value = inputElement.nativeElement.value;
-      data[id] = value;
-      
-    });
-    // Convert object to JSON string
-    const jsonData = JSON.stringify(data);
+      // Loop through all input elements
+      this.inputElements.forEach(inputElement => {
+        // Get the input's id and value and add it to the data object
+        const id = inputElement.nativeElement.id;
+        const value = inputElement.nativeElement.value;
+        data[id] = value;
+      });
+      // Convert object to JSON string
+      const jsonData = JSON.stringify(data);
 
-    // Create Blob and initiate download (same as previous examples)
-    const blob = new Blob([jsonData], { type: 'application/json' });
-    const url = window.URL.createObjectURL(blob);
+      // Create Blob and initiate download (same as previous examples)
+      const blob = new Blob([jsonData], { type: 'application/json' });
+      const url = window.URL.createObjectURL(blob);
 
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'data.json';
-    document.body.appendChild(a);
-    a.click();
-    window.URL.revokeObjectURL(url);
-    document.body.removeChild(a);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'data.json';
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+    }
   }
+
   copyAsTabSeparateValues(){
-    const data = {};
+    if (this.isFormValid) {
+      const data = {};
 
-    // Loop through all input elements
-    this.inputElements.forEach(inputElement => {
-      
-      const id = inputElement.nativeElement.id;
-      const value = inputElement.nativeElement.value;
-      data[id] = value;
-      
-    });
-    console.log(data);
-
-    let textToCopy = "";
-    textToCopy = textToCopy.concat(
-      data["last-name"],"\t",
-      data["first-name"],"\t",
-      data["date-of-birth"],"\t",
-      data["passport-number"],"\t",
-      data["date-of-issuance"],"\t",
-      data["date-of-expiry"],"\t",
-      data["place-of-birth"]
-    );
-    this.clipboard.copy(textToCopy);
-    
-    
+      // Loop through all input elements
+      this.inputElements.forEach(inputElement => {
+        const id = inputElement.nativeElement.id;
+        const value = inputElement.nativeElement.value;
+        data[id] = value;
+      });
+      console.log(data);
+      let textToCopy = "";
+      textToCopy = textToCopy.concat(
+        data["last-name"],"\t",
+        data["first-name"],"\t",
+        data["date-of-birth"],"\t",
+        data["passport-number"],"\t",
+        data["date-of-issuance"],"\t",
+        data["date-of-expiry"],"\t",
+        data["place-of-birth"]
+      );
+      this.clipboard.copy(textToCopy);
+    }
   }
+
   extractFileData(): void {
     this.dataLoaded = false;
     this.fileTransferService.extractFile(this.file).subscribe(
@@ -160,8 +174,8 @@ export class DataFormComponent {
         // Handle the error appropriately
       }
     );
-    
   }
+
   isInvalid(controlName: string): boolean {
     const control = this.myForm.get(controlName);
     return control ? control.invalid : false;

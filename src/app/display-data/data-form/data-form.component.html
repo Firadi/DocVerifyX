@@ -30,6 +30,7 @@
                     class="form-control" 
                     [ngClass]="{ 'warning': isInvalid('last-name') }" 
                     formControlName="last-name"
+                    #inputElement
                 >
                 <div *ngIf="shouldShowError('last-name')" class="text-danger">
                     <div *ngIf="getError('last-name', 'required')">Last name is required.</div>
@@ -49,6 +50,7 @@
                 class="form-control" 
                 [ngClass]="{ 'warning': isInvalid('passport-number') }" 
                 formControlName="passport-number"
+                #inputElement
             >
             <div *ngIf="shouldShowError('passport-number')" class="text-danger">
                 <div *ngIf="getError('passport-number', 'required')">Passport number is required.</div>
@@ -65,6 +67,7 @@
                 class="form-control" 
                 [ngClass]="{ 'error': getError('national-id', 'required'),'warning': isInvalid('national-id') }" 
                 formControlName="national-id"
+                #inputElement
             >
             <div *ngIf="shouldShowError('national-id')" class="text-danger">
                 <div *ngIf="getError('national-id', 'required')">National ID is required.</div>
@@ -85,6 +88,7 @@
                 class="form-control" 
                 [ngClass]="{ 'warning': isInvalid('date-of-issuance') }" 
                 formControlName="date-of-issuance"
+                #inputElement
             >
             <div *ngIf="shouldShowError('date-of-issuance')" class="text-danger">
                 <div *ngIf="getError('date-of-issuance', 'required')">Date of issuance is required.</div>
@@ -101,6 +105,7 @@
                 class="form-control" 
                 [ngClass]="{ 'warning': isInvalid('date-of-expiry') }" 
                 formControlName="date-of-expiry"
+                #inputElement
             >
             <div *ngIf="shouldShowError('date-of-expiry')" class="text-danger">
                 <div *ngIf="getError('date-of-expiry', 'required')">Date of expiry is required.</div>
@@ -121,6 +126,7 @@
                 class="form-control" 
                 [ngClass]="{ 'warning': isInvalid('date-of-birth') }" 
                 formControlName="date-of-birth"
+                #inputElement
             >
             <div *ngIf="shouldShowError('date-of-birth')" class="text-danger">
                 <div *ngIf="getError('date-of-birth', 'required')">Date of birth is required.</div>
@@ -137,6 +143,7 @@
                 class="form-control" 
                 [ngClass]="{ 'warning': isInvalid('place-of-birth') }" 
                 formControlName="place-of-birth"
+                #inputElement
             >
             <div *ngIf="shouldShowError('place-of-birth')" class="text-danger">
                 <div *ngIf="getError('place-of-birth', 'required')">Place of birth is required.</div>
@@ -150,8 +157,8 @@
     <div class="row mt-4">
         <div class="col-md-12">
             <button type="button" class="btn btn-primary me-2">Submit</button>
-            <button type="button" class="btn btn-success me-2" (click)="downloadJson()">Download as JSON</button>
-            <button type="button" class="btn btn-success" (click)="copyAsTabSeparateValues()">Copy</button>
+            <button type="button" class="btn btn-success me-2" (click)="downloadJson()" [ngClass]="{'disabled': !isFormValid}">Download as JSON</button>
+            <button type="button" class="btn btn-success" (click)="copyAsTabSeparateValues()" [ngClass]="{'disabled': !isFormValid}">Copy</button>
         </div>
         <div class="col-md-6">
         </div>

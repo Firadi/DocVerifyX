@@ -1,0 +1,9 @@
+<div class="image-settings">
+    <i class="fa-regular fa-magnifying-glass-plus" [appZoomImage] [zoomTarget]="target"></i>
+    <i class="fa-solid fa-rotate-left" [appZoomImage]="'rotate-right'" [zoomTarget]="target"></i>
+    <i class="fa-solid fa-rotate-right" [appZoomImage]="'rotate-left'" [zoomTarget]="target"></i>
+    <i class="fa-regular fa-magnifying-glass-minus" [appZoomImage]="'zoom-out'" [zoomTarget]="target" ></i>
+</div>
+<div class="box">
+    <img [src]="file?.url" alt="Upload" class="upload-icon" #target>
+</div>

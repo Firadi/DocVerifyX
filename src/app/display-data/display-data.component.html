@@ -9,17 +9,7 @@
           </div>
       <!-- Upload Area -->
       <div class="col-md-6  col1">
-        
-        <div class="image-settings">
-            <i class="fa-regular fa-magnifying-glass-plus" [appZoomImage] [zoomTarget]="target"></i>
-            <i class="fa-solid fa-rotate-left" [appZoomImage]="'rotate-right'" [zoomTarget]="target"></i>
-            <i class="fa-solid fa-rotate-right" [appZoomImage]="'rotate-left'" [zoomTarget]="target"></i>
-            <i class="fa-regular fa-magnifying-glass-minus" [appZoomImage]="'zoom-out'" [zoomTarget]="target" ></i>
-        </div>
-        <div class="box">
-            <img [src]="file?.url" alt="Upload" class="upload-icon" #target>
-        </div>
-        
+        <app-image-box-controll [file]="file"></app-image-box-controll>
       </div>
   
       <!-- Personal Info Form -->

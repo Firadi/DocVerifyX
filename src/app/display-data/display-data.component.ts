@@ -9,13 +9,14 @@ import { NgClass, NgIf } from '@angular/common';
 import { ZoomImageDirective } from '../directives/zoom-image.directive';
 import { ExtractFileService } from '../services/extract-file.service';
 import { ExtractDataFromPassportApiService } from '../services/extract-data-from-passport-api.service';
+import { ImageBoxControllComponent } from './image-box-controll/image-box-controll.component';
 
 
 
 @Component({
   selector: 'app-display-data',
   standalone: true,
-  imports: [RouterLink, MatProgressSpinnerModule, NgIf, ZoomImageDirective, NgClass],
+  imports: [RouterLink, MatProgressSpinnerModule, NgIf, NgClass, ImageBoxControllComponent],
   templateUrl: './display-data.component.html',
   styleUrl: './display-data.component.scss'
 })

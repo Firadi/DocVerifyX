@@ -30,7 +30,7 @@ export class ExtractDataFromPassportApiService {
         `https://content-vision.googleapis.com/v1/images:annotate?key=${this.apiKey}`,
         ocrRequestBody
       ).toPromise();
-
+      console.log(response);
       return response;
     } catch (error) {
       console.error('Error:', error);

@@ -84,7 +84,7 @@ export class DataFormComponent {
         'first-name': this.data['firstName'].trim() || '',
         'last-name': this.data['lastName'].trim() || '',
         'national-id': this.data['cin'].trim() || '',
-        'passport-number': this.data['Npass'].trim() || '',
+        'passport-number': this.data['Npass'].trim().toUpperCase() || '',
         'place-of-birth':  this.data['prefecture'].trim() || ''
       });
     }

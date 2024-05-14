@@ -1,12 +1,14 @@
 import { Component, ElementRef, HostListener, QueryList, ViewChildren } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ExtractFileService } from '../extract-file.service';
+
 import { FileHandle } from '../directives/drag-drop.directive';
 import { Router } from '@angular/router';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { Clipboard } from '@angular/cdk/clipboard';
 import { NgClass, NgIf } from '@angular/common';
 import { ZoomImageDirective } from '../directives/zoom-image.directive';
+import { ExtractFileService } from '../services/extract-file.service';
+import { ExtractDataFromPassportApiService } from '../services/extract-data-from-passport-api.service';
 
 
 
@@ -26,7 +28,8 @@ export class DisplayDataComponent {
   constructor(
     private fileTransferService: ExtractFileService,
     private router: Router,
-    private clipboard: Clipboard
+    private clipboard: Clipboard,
+    private DataFromPassportService: ExtractDataFromPassportApiService
   ){}
 
   file:FileHandle | null = null; 
@@ -35,7 +38,7 @@ export class DisplayDataComponent {
     this.fileTransferService.file$.subscribe(file => {
       this.file = file;
       if (this.file === null) this.router.navigate([''])
-      else this.extractFileData();
+      else this.processPassportImage();
     });
 
   }
@@ -45,6 +48,7 @@ export class DisplayDataComponent {
     event.preventDefault(); 
     this.copyAsTabSeparateValues();
   }
+
   extractFileData(): void {
     this.dataLoaded = false;
     this.fileTransferService.extractFile(this.file).subscribe(
@@ -61,6 +65,19 @@ export class DisplayDataComponent {
       }
     );
     
+  }
+  async processPassportImage() {
+    this.dataLoaded = false;
+    const file = this.file.file;
+    try {
+      this.data = await this.DataFromPassportService.main(file);
+      this.dataLoaded = true;
+      console.log('Extracted Data:', this.data);
+      // Do something with the extracted data
+    } catch (error) {
+      this.dataLoadedError = true;
+      console.error('Error extracting data:', error);
+    }
   }
   downloadJson() {
     // Initialize an object to store input values

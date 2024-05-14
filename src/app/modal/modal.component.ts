@@ -3,10 +3,11 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { DragDropDirective, FileHandle } from '../directives/drag-drop.directive';
 import { NgClass, NgFor, NgIf } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { ExtractFileService } from '../extract-file.service';
+
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { ExtractFileService } from '../services/extract-file.service';
 
 @Component({
 	selector: 'ngbd-modal-content',

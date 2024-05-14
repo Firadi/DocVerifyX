@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { FileHandle } from './directives/drag-drop.directive';
+
 import { HttpClient } from '@angular/common/http';
+import { FileHandle } from '../directives/drag-drop.directive';
 
 @Injectable({
   providedIn: 'root'
